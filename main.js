@@ -26,15 +26,9 @@ const getComputerChoice = (humanInput) => {
 };
 
 let getHumanChoice = () => {
-  let input = prompt(`Rock, Paper, or Scissors?`);
-
-  if (input === `Rock` || input === `Paper` || input === `Scissors`) {
-    return input;
-  } else {
-    return (input = prompt(
-      `Incorrect value entered! Rock, Paper, or Scissors? (Be sure to capitalise and check spelling!)`
-    ));
-  }
+  let input = prompt(`Rock, paper, or scissors?`);
+  input = `${input.split("")[0].toUpperCase()}${input.slice(1).toLowerCase()}`;
+  return input;
 };
 
 getComputerChoice(getHumanChoice());
