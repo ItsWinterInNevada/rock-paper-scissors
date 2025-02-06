@@ -1,3 +1,6 @@
+let humanScore = 0;
+let computerScore = 0;
+
 const getComputerChoice = () => {
   let computerChoice = Math.round(Math.random() * 100) / 100;
   if (computerChoice <= 0.33) {
@@ -16,19 +19,38 @@ const getHumanChoice = () => {
   return input;
 };
 
-const rockPaperScissors = (computerChoice, humanInput) => {
+const playRound = (computerChoice, humanInput) => {
   console.log(`Computer chose ${computerChoice}. You chose ${humanInput}.`);
   if (
     (computerChoice === `Rock` && humanInput === `Paper`) ||
     (computerChoice === `Paper` && humanInput === `Scissors`) ||
     (computerChoice === `Scissors` && humanInput === `Rock`)
   ) {
-    console.log(`You win!`);
+    humanScore++;
+    console.log(`You win this round! Your score = ${humanScore}`);
+    return humanScore;
   } else if (computerChoice === humanInput) {
     console.log(`It's a draw!`);
   } else {
-    console.log(`You lose!`);
+    computerScore++;
+    console.log(`You lose this round! Comp score = ${computerScore}`);
+    return computerScore;
   }
 };
 
-rockPaperScissors(getComputerChoice(), getHumanChoice());
+const playGame = () => {
+  while (humanScore < 5 && computerScore < 5) {
+    playRound(getComputerChoice(), getHumanChoice());
+  }
+  if (humanScore === 5) {
+    console.log(
+      `Your score is ${humanScore} and Computer score is ${computerScore}. You win!`
+    );
+  } else if (computerScore === 5) {
+    console.log(
+      `Your score is ${humanScore} and Computer score is ${computerScore}.You lose!`
+    );
+  }
+};
+
+playGame();
