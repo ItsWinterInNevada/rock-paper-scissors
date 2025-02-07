@@ -13,13 +13,7 @@ const getComputerChoice = () => {
   return computerChoice;
 };
 
-const getHumanChoice = () => {
-  let input = prompt(`Rock, paper, or scissors?`);
-  input = `${input.split("")[0].toUpperCase()}${input.slice(1).toLowerCase()}`;
-  return input;
-};
-
-const playRound = (computerChoice, humanInput) => {
+const playRound = function (computerChoice, humanInput) {
   console.log(`Computer chose ${computerChoice}. You chose ${humanInput}.`);
   if (
     (computerChoice === `Rock` && humanInput === `Paper`) ||
@@ -39,18 +33,22 @@ const playRound = (computerChoice, humanInput) => {
 };
 
 const playGame = () => {
-  while (humanScore < 5 && computerScore < 5) {
-    playRound(getComputerChoice(), getHumanChoice());
-  }
-  if (humanScore === 5) {
-    console.log(
-      `Your score is ${humanScore} and Computer score is ${computerScore}. You win!`
-    );
-  } else if (computerScore === 5) {
-    console.log(
-      `Your score is ${humanScore} and Computer score is ${computerScore}.You lose!`
-    );
-  }
+  const input = document.querySelector(`.container`);
+  input.addEventListener(`click`, (event) => {
+    if (humanScore < 5 && computerScore < 5) {
+      let humanInput = event.target.textContent;
+      playRound(getComputerChoice(), humanInput);
+      return input;
+    } else if (humanScore === 5) {
+      console.log(
+        `Your score is ${humanScore} and Computer score is ${computerScore}. You win!`
+      );
+    } else if (computerScore === 5) {
+      console.log(
+        `Your score is ${humanScore} and Computer score is ${computerScore}.You lose!`
+      );
+    }
+  });
 };
 
 playGame();
